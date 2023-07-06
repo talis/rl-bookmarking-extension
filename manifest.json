@@ -1,27 +1,32 @@
 {
     "name": "__MSG_extensionName__",
     "author": "Talis Education Limited",
-    "description":"__MSG_description__",
+    "description": "__MSG_description__",
     "version": "__VERSION__",
-    "icons":  {
+    "icons": {
         "16": "images/icon16.png",
         "48": "images/icon48.png",
         "128": "images/icon128.png",
         "176": "images/icon176.png"
     },
     "background": {
-        "page": "background.html",
-        "persistent": false
+        "service_worker": "background.js",
+        "type": "module"
     },
     "permissions": [
-        "activeTab", "storage", "https://talis-public.talis.com/*"
+        "activeTab",
+        "scripting",
+        "storage",
+        "tabs"
+    ],
+    "host_permissions": [
+        "https://talis-public.talis.com/*"
     ],
     "options_ui": {
-        "page": "options.html",
-        "chrome_style": true
+        "page": "options.html"
     },
     "options_page": "options.html",
-    "browser_action": {
+    "action": {
         "default_title": "__MSG_browserActionTitle__",
         "default_icon": {
             "16": "images/icon16.png",
@@ -31,7 +36,7 @@
             "30": "images/icon30.png",
             "32": "images/icon32.png",
             "40": "images/icon40.png"
-          }
+        }
     },
     "content_scripts": [
         {
@@ -40,5 +45,5 @@
         }
       ],    
     "default_locale": "en",
-    "manifest_version": 2
+    "manifest_version": 3
 }

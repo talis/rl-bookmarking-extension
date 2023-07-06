@@ -5,7 +5,7 @@
  * The non-branded 'Talis' extension should use the tenant list from:
  * https://talis-public.s3-eu-west-1.amazonaws.com/talis.com/customers.json
  */
-var allTenants = {
+export const allTenants = {
     "broadminster" : {
         "name" : "Broadminster University",
         "apps" : {

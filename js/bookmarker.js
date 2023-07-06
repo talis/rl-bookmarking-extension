@@ -2,9 +2,9 @@
  * Content script to inject the dynamic bookmarking JS directly into the page.
  */
 (function() {
-  function chromeOrBrowser() {
-    return this.browser || chrome;
-  }
+  // function chromeOrBrowser() {
+  //   return this.browser || chrome;
+  // }
 
   /**
    * Injected into page to redirect to the dynamic page parser
@@ -39,7 +39,7 @@
     }
   }
 
-  chromeOrBrowser().runtime.onMessage.addListener(function (message) {
+  chrome.runtime.onMessage.addListener(function (message) {
     bookmarkPage(message.tenant);
   });
 })();

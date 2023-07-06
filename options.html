@@ -7,9 +7,25 @@
     <link rel="stylesheet" href="/dependencies/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/options.css" />
     <script src="/dependencies/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="js/allTenants.js"></script>
-    <script src="js/tenants.js"></script>
-    <script src="js/options.js"></script>
+    <script type="module" src="background.js"></script>
+    <script type="module" src="js/allTenants.js"></script>
+    <script type="module" src="js/tenants.js"></script>
+    <script type="module" src="js/options.js"></script>
+<!--    <script type="module">-->
+<!--        import 'js/allTenants.js';-->
+<!--        import 'js/tenants.js';-->
+<!--        import 'js/options.js';-->
+
+<!--        await navigator.serviceWorker.register('js/allTenants.js', {-->
+<!--            type: 'module',-->
+<!--        });-->
+<!--        await navigator.serviceWorker.register('js/tenants.js', {-->
+<!--            type: 'module',-->
+<!--        });-->
+<!--        await navigator.serviceWorker.register('js/options.js', {-->
+<!--            type: 'module',-->
+<!--        });-->
+<!--    </script>-->
 </head>
 <body>
     <div class="container-fluid">

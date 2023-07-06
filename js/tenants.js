@@ -4,14 +4,14 @@
  *
  * @returns {Object}
  */
-function chromeOrBrowser() {
-    return this.browser || chrome;
-}
+// export function chrome {
+//     return this.browser || chrome;
+// }
 
-var storage = chromeOrBrowser().storage.sync;
+var storage = chrome.storage.sync;
 
 if (!storage) {
-    storage = chromeOrBrowser().storage.local;
+    storage = chrome.storage.local;
 }
 /**
  * @callback activeTenant
@@ -23,16 +23,16 @@ if (!storage) {
  *
  * @param {activeTenant} cb
  */
-function getActiveTenant(cb) {
+export function getActiveTenant(cb) {
     storage.get({
         activeTenant: null
     }, function(tenants, err) {
-        if (chromeOrBrowser().runtime.lastError || typeof tenants === 'undefined' || !tenants.activeTenant) {
-            chromeOrBrowser().storage.local.get({
+        if (chrome.runtime.lastError || typeof tenants === 'undefined' || !tenants.activeTenant) {
+            chrome.storage.local.get({
                 activeTenant: null
             }, function(tenants) {
                 if (tenants.activeTenant) {
-                    storage = chromeOrBrowser().storage.local;
+                    storage = chrome.storage.local;
                 }
 
                 convertActiveTenantToObject(tenants.activeTenant, function(updatedTenant){
@@ -94,17 +94,17 @@ function convertActiveTenantToObject(activeTenant, cb) {
  * @param {object}     tenant
  * @param {function()} cb - Callback to run once stored
  */
-function saveActiveTenant(tenant, cb) {
+export function saveActiveTenant(tenant, cb) {
     storage.set({
         activeTenant: tenant
     }, function() {
-        if (chromeOrBrowser().runtime.lastError) {
-            storage = chromeOrBrowser().storage.local;
+        if (chrome.runtime.lastError) {
+            storage = chrome.storage.local;
             return saveActiveTenant(tenant, cb);
         } else {
             getActiveTenant(function(t) {
                 if (typeof t === 'undefined') {
-                    storage = chromeOrBrowser().storage.local;
+                    storage = chrome.storage.local;
                     return saveActiveTenant(tenant, cb);
                 } else {
                     cb();
@@ -126,7 +126,7 @@ function saveActiveTenant(tenant, cb) {
  *
  * @param {allTenants} cb
  */
-function getTenants(cb) {
+export function getTenants(cb) {
     var tenants = {};
     getTenantList(function(tenantList) {
         for (var code in tenantList) {
@@ -166,7 +166,7 @@ function getTenantList(cb) {
  * @param {string} tenantCode - the tenant short code
  * @param {string} tenantRegion - the region for this tenancy
  */
-function buildTenant(tenantCode, tenantRegion) {
+export function buildTenant(tenantCode, tenantRegion) {
   return {
     "name" : tenantCode,
     "code" : tenantCode,
